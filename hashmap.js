@@ -109,7 +109,7 @@ return lor;
 
 }
 
-console.log(createLor());
+// console.log(createLor());
 
 function palindromeChecker2(str){
     let palMap= new HashMap();
@@ -148,6 +148,55 @@ function palindromeChecker2(str){
         return false;
     }
 }
-console.log(palindromeChecker2('eracecare'));
-console.log(palindromeChecker2('racecar'));
-console.log(palindromeChecker2('north'));
+// console.log(palindromeChecker2('eracecare'));
+// console.log(palindromeChecker2('racecar'));
+// console.log(palindromeChecker2('north'));
+
+function anagram (arr){
+    let anagram = new HashMap();
+    let combined = new HashMap();
+    let newArray=[];
+
+    for(let i=0; i<arr.length; i++){
+        let value=0;
+
+        for(let j=0; j<arr[i].length; j++){
+            value += arr[i].charCodeAt(j);
+            anagram.set(arr[i], value)
+        }
+    }
+
+
+    for(let i=0; i<arr.length; i++){
+        let value = anagram.get(arr[i])
+
+        try{
+            if(combined.get(value)){
+            let currentArray= combined.get(value);
+            combined.set(value, [...currentArray, arr[i]]);
+            }
+
+        }
+        catch(err){
+            if(err.message==="Key Error"){
+            combined.set(value, [arr[i]]);
+            }
+        }
+        
+    }    
+    for(let i=0; i<combined._slots.length; i++){
+        try{
+            if(combined._slots[i]){
+                newArray.push(combined._slots[i].value)
+            }
+        }
+        catch(err){
+            console.log(err.message);
+        }
+
+    }
+    return newArray;
+
+}
+
+console.log(anagram(['east', 'cars', 'acre', 'arcs', 'cras', 'teas', 'eats', 'race']))
