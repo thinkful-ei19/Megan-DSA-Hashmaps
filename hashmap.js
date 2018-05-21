@@ -21,10 +21,21 @@ class HashMap {
             this._resize(this._capacity*HashMap.SIZE_RATIO);
         }
         const index = this._findSlot(key);
-        this._slots[index]={
-            key, value
-        };
-        this.length++
+        
+        //if key exists change value but dont change length
+        //if not add value and change length
+        if(!this._slots[index]){
+            this._slots[index]={
+                key, value
+            };
+            this.length++
+        }
+        else{
+            this._slots[index]={
+                key, value
+            };  
+        }
+        
     }
 
     remove(key){
@@ -87,15 +98,15 @@ function createLor(){
 
     lor.set("Hobbit", "Bilbo");
     lor.set("Hobbit", "Frodo");
-    lor.set("Wizard", "Gandolf");
-    lor.set("Human", "Aragorn");
-    lor.set("Elf", "Legolas");
-    lor.set("Maiar", "The Necromancer");
-    lor.set("Maiar", "Sauron");
-    lor.set("Ringbearer", "Gollum");
-    lor.set("LadyOfLight", "Galadriel");
-    lor.set("HalfElven", "Arwen");
-    lor.set("Ent", "Treebeard");
+    // lor.set("Wizard", "Gandolf");
+    // lor.set("Human", "Aragorn");
+    // lor.set("Elf", "Legolas");
+    // lor.set("Maiar", "The Necromancer");
+    // lor.set("Maiar", "Sauron");
+    // lor.set("Ringbearer", "Gollum");
+    // lor.set("LadyOfLight", "Galadriel");
+    // lor.set("HalfElven", "Arwen");
+    // lor.set("Ent", "Treebeard");
 
 //    return lor.get('Maiar')
 
@@ -103,68 +114,70 @@ return lor;
 
 }
 
-// console.log(createLor());
+console.log(createLor());
 
-function palindromeChecker(str, permutation){
-    if (str.length !== permutation.length){
-        return false;
-    }
+// function palindromeChecker(str, permutation){
+//     if (str.length !== permutation.length){
+//         return false;
+//     }
 
-    const strMap = new HashMap();
-    const palMap = new HashMap();
+//     const strMap = new HashMap();
+//     const palMap = new HashMap();
 
-    for(let i=0; i<str.length; i++){
-        let count=0;
-        strMap.set(str[i], count);
+//     for(let i=0; i<str.length; i++){
+//         let count=0;
+//         strMap.set(str[i], count);
 
-        for(let j=0; j<str.length; j++){
-           if(str[i]===str[j]){
-               let value = strMap.get(str[i]);
-               strMap.set(str[i], value+1);
-           }
-        }   
-    }
+//         for(let j=0; j<str.length; j++){
+//            if(str[i]===str[j]){
+//                let value = strMap.get(str[i]);
+//                strMap.set(str[i], value+1);
+//            }
+//         }   
+//     }
 
-    for(let i=0; i<permutation.length; i++){
-        let count=0;
-        palMap.set(permutation[i], count);
+//     for(let i=0; i<permutation.length; i++){
+//         let count=0;
+//         palMap.set(permutation[i], count);
 
-        for(let j=0; j<permutation.length; j++){
+//         for(let j=0; j<permutation.length; j++){
 
-           if(permutation[i]===permutation[j]){
-               let value = palMap.get(permutation[i]);
-               palMap.set(permutation[i], value+1);
-           }
-        }   
-    }
+//            if(permutation[i]===permutation[j]){
+//                let value = palMap.get(permutation[i]);
+//                palMap.set(permutation[i], value+1);
+//            }
+//         }   
+//     }
 
-    for(let i=0; i<str.length; i++){
-        let strKey = str[i];
-        let strValue= strMap.get(strKey);
+//     for(let i=0; i<str.length; i++){
+//         let strKey = str[i];
+//         let strValue= strMap.get(strKey);
        
-        for(let j=0; j<permutation.length; j++){
-           let palKey= permutation[j];
-           let palValue = palMap.get(palKey);
-           try{
-               strMap.get(palKey)
-            }
-           catch(err){
-               if(err.message==='Key Error'){
-                   return false;
-               }
-           }
+//         for(let j=0; j<permutation.length; j++){
+//            let palKey= permutation[j];
+//            let palValue = palMap.get(palKey);
+//            try{
+//                strMap.get(palKey)
+//             }
+//            catch(err){
+//                if(err.message==='Key Error'){
+//                    return false;
+//                }
+//            }
 
-           if(strKey===palKey){
-               if(strValue!==palValue){
-                   return false;
-               }
-           }
+//            if(strKey===palKey){
+//                if(strValue!==palValue){
+//                    return false;
+//                }
+//            }
           
-        }   
-    }
+//         }   
+//     }
 
 
-    return true;
+//     return true;
 
-}
-console.log(palindromeChecker('racecar', 'carerace'));
+// }
+// console.log(palindromeChecker('racecar', 'carerace'));
+
+// function palindromeChecker2(str)
