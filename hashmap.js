@@ -199,4 +199,5 @@ function anagram (arr){
 
 }
 
-console.log(anagram(['east', 'cars', 'acre', 'arcs', 'cras', 'teas', 'eats', 'race']))
+// console.log(anagram(['east', 'cars', 'acre', 'arcs', 'cras', 'teas', 'eats', 'race']))
+
